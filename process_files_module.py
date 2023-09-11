@@ -27,17 +27,16 @@ def get_visible_files(directory):
     return visible_files
 
 
-def main():
-    """Prints out the names of all the visible files in the current directory.
+def read_directory(directory):
+    """Processes the given directory.
+
+    Args:
+        directory (str): The path to teh directory.
     """
 
     # Get the list of visible files in the current directory.
-    visible_files = get_visible_files(os.getcwd())
+    visible_files = get_visible_files(directory)
 
     # Print out the names of all the visible files.
     for file in visible_files:
         print(file)
-
-
-if __name__ == "__main__":
-    main()
