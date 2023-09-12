@@ -1,0 +1,28 @@
+name: Python CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11.x
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check PEP 8 compliance
+        run: pycodestyle .
+
+      - name: Format code with autopep8
+        run: autopep8 --in-place --recursive .
+
+      - name: Run tests
+        run: python -m unittest discover tests
