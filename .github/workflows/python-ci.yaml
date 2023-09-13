@@ -16,7 +16,7 @@ jobs:
           python-version: 3.11.x
 
       - name: Install dependencies
-        run: python -m pip install -r .github/workflows/requirements.txt
+        run: python3 -m pip3 install -r .github/workflows/requirements.txt
 
       - name: Check PEP 8 compliance
         run: pycodestyle .
