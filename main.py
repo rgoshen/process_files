@@ -16,9 +16,9 @@ def main():
     directory_to_process = args.directory if args.directory else os.getcwd()
 
     # Check if the specified directory is empty (None) or empty string
-    if directory_to_process is None or directory_to_process.strip() == "":
-        print("Error: Missing directory path. Please provide a directory path using the '-d' flag.")
-        return  # Exit early if directory is missing
+    # if directory_to_process is None or directory_to_process.strip() == "":
+    #     print("Error: Missing directory path. Please provide a directory path using the '-d' flag.")
+    #     return  # Exit early if directory is missing
 
     # Check if the specified directory exists
     if not os.path.exists(directory_to_process):
