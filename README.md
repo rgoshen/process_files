@@ -6,17 +6,12 @@ This script will loop through all files in a given directory, prepend a date and
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-
 - [Installation](#installation)
-
 - [Usage](#usage)
-
 - [Options](#options)
-
 - [Examples](#examples)
-
+- [Running Tests](#running-tests)
 - [Contributing](#contributing)
-
 - [License](#license)
 
 ## Prerequisites
@@ -74,6 +69,17 @@ python main.py -d /path/to/directory -D 2023-09-15
    python main.py -d /path/to/directory
    ```
 
+## Running Tests
+
+Tests for this project are located in the "tests" folder in the project root directory and use the built-in `unittest` framework. To run the tests, follow these steps:
+
+1. Open a terminal or command prompt.
+2. Navigate to the project directory.
+3. Run the tests using the `unittest` test runner. For example:
+
+```shell
+python -m unittest discover tests/
+```
 
 ## Contributing
 
