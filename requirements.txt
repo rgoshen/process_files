@@ -24,7 +24,6 @@ cffi==1.15.1
 charset-normalizer==3.2.0
 click==8.1.7
 comm==0.1.4
-cryptography @ file:///private/tmp/python-cryptography-20230801-6306-oaqugx/cryptography-41.0.3
 debugpy==1.7.0
 decorator==5.1.1
 defusedxml==0.7.1
@@ -89,7 +88,6 @@ Pygments==2.16.1
 pynvim==0.4.3
 pytest==7.4.2
 python-json-logger==2.0.7
-PyYAML @ file:///private/tmp/pyyaml-20230717-6270-1iiwi1j/PyYAML-6.0.1
 pyzmq==25.1.1
 referencing==0.30.2
 requests==2.31.0
@@ -133,7 +131,6 @@ cffi==1.15.1
 charset-normalizer==3.2.0
 click==8.1.7
 comm==0.1.4
-cryptography @ file:///private/tmp/python-cryptography-20230801-6306-oaqugx/cryptography-41.0.3
 debugpy==1.7.0
 decorator==5.1.1
 defusedxml==0.7.1
@@ -198,7 +195,6 @@ Pygments==2.16.1
 pynvim==0.4.3
 pytest==7.4.2
 python-json-logger==2.0.7
-PyYAML @ file:///private/tmp/pyyaml-20230717-6270-1iiwi1j/PyYAML-6.0.1
 pyzmq==25.1.1
 referencing==0.30.2
 requests==2.31.0
