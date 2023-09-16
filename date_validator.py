@@ -13,7 +13,8 @@ def validate_date(date_str):
             str: The valid date string if the input is in 'YYYY-MM-DD' format.
 
         Raises:
-            argparse.ArgumentTypeError: If the input date string is not in the correct format.
+            argparse.ArgumentTypeError: If the input date string is not in
+            the correct format.
 
         Example:
             >>> validate_date("2023-09-11")
@@ -23,4 +24,6 @@ def validate_date(date_str):
         datetime.datetime.strptime(date_str, '%Y-%m-%d')
         return date_str
     except ValueError:
-        raise argparse.ArgumentTypeError("Invalid date format. Please use 'YYYY-MM-DD'.")
+        raise argparse.ArgumentTypeError(
+            "Invalid date format. Please use 'YYYY-MM-DD'."
+            )

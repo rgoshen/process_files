@@ -14,7 +14,9 @@ class TestProcessFiles(unittest.TestCase):
         os.mkdir(self.test_directory)
         with open(os.path.join(self.test_directory, "file1.txt"), "w") as f:
             f.write("Content 1")
-        with open(os.path.join(self.test_directory, ".hidden_file.txt"), "w") as f:
+        with open(
+            os.path.join(self.test_directory, ".hidden_file.txt"), "w"
+            ) as f:
             f.write("Content 2")
 
     def tearDown(self):
