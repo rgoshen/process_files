@@ -1,7 +1,10 @@
 import argparse
 import os
+from datetime import datetime
 
-from process_files_module import read_directory
+from date_validator import \
+    validate_date  # Import the function from date_validator.py
+from process_files_module import prepend_date_to_files
 
 
 def main():
@@ -14,6 +17,13 @@ def main():
         "-d", "--directory", help="Path to the directory to process"
         )
 
+    # Add the '-D' or '--date' flag for the date to append to the filename
+    parser.add_argument(
+        "-D", "--date", type=validate_date, nargs='?',
+        const=datetime.now().strftime('%Y-%m-%d'),
+        help="Date in 'YYYY-MM-DD' format"
+        )
+
     args = parser.parse_args()
 
     # Determine the directory to process
@@ -24,8 +34,12 @@ def main():
         print(f"Error: Directory '{directory_to_process}' does not exist.")
         return  # Exit early if the directory doesn't exist
 
-    # Call read_directory with the specified or default directory
-    read_directory(directory_to_process)
+    # Check if a date was provided
+    if args.date:
+        date_to_prepend = args.date
+        prepend_date_to_files(directory_to_process, date_to_prepend)
+
+    print(f"Files in '{directory_to_process}' finished processing.")
 
 
 if __name__ == "__main__":
