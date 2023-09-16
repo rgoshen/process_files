@@ -1,5 +1,0 @@
-[tool.autopep8]
-ignore = ['E125']
-in-place = true
-recursive = true
-aggressive = 3
