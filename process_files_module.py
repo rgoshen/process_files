@@ -56,19 +56,19 @@ def prepend_date_to_files(directory, date):
         progress_bar(file_count, total_files)
 
     print(colorama.Fore.RESET)
-    print_directory_files(directory)
+    # print_directory_files(directory)
 
 
-def print_directory_files(directory):
-    """Processes the given directory.
+# def print_directory_files(directory):
+#     """Processes the given directory.
 
-    Args:
-        directory (str): The path to the directory.
-    """
+#     Args:
+#         directory (str): The path to the directory.
+#     """
 
-    # Get the list of visible files in the current directory.
-    visible_files = get_visible_files(directory)
+#     # Get the list of visible files in the current directory.
+#     visible_files = get_visible_files(directory)
 
-    # Print out the names of all the visible files (including prepended date)
-    for file in visible_files:
-        print(file)
+#     # Print out the names of all the visible files (including prepended date)
+#     for file in visible_files:
+#         print(file)
