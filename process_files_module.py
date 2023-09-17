@@ -1,5 +1,9 @@
 import os
 
+import colorama
+
+from proress_bar import progress_bar
+
 
 def get_visible_files(directory):
     """Gets a list of all the visible files in the given directory.
@@ -37,6 +41,9 @@ def prepend_date_to_files(directory, date):
     # Get the list of visible files in the directory.
     visible_files = get_visible_files(directory)
 
+    file_count = 0
+    total_files = len(visible_files)
+
     # Prepend the date to each file name
     for index, file in enumerate(visible_files):
         # Join the directory path with the new file name
@@ -45,7 +52,10 @@ def prepend_date_to_files(directory, date):
         os.rename(os.path.join(directory, file), new_file_path)
         # Update the list of visible files with the new name
         visible_files[index] = new_file_path
+        file_count += 1
+        progress_bar(file_count, total_files)
 
+    print(colorama.Fore.RESET)
     print_directory_files(directory)
 
 
