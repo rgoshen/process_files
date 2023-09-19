@@ -38,6 +38,9 @@ def prepend_date_to_files(directory, date):
         directory (str): The path to the directory.
         date (str): The date string to prepend.
     """
+    # Remove colons from the time string
+    date = date.replace("-", "")
+
     # Get the list of visible files in the directory.
     visible_files = get_visible_files(directory)
 
@@ -54,6 +57,9 @@ def prepend_date_to_files(directory, date):
         visible_files[index] = new_file_path
         file_count += 1
         progress_bar(file_count, total_files)
+
+    print(colorama.Fore.RESET)
+    print_directory_files(directory)
 
 
 def prepend_time_to_files(directory, time):
