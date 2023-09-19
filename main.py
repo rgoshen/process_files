@@ -1,10 +1,10 @@
 import argparse
 import os
-from datetime import datetime, time
+from datetime import datetime
 
 from date_validator import validate_date  # Import the function from date_validator.py
 from time_validator import validate_time  # Import the function from time_validator.py
-from process_files_module import prepend_date_to_files
+from process_files_module import prepend_date_to_files, prepend_time_to_files
 
 
 def main():
@@ -49,6 +49,11 @@ def main():
     if args.date:
         date_to_prepend = args.date
         prepend_date_to_files(directory_to_process, date_to_prepend)
+
+    # Check if a time was provided
+    if args.time:
+        time_to_append = args.time
+        prepend_time_to_files(directory_to_process, time_to_append)
 
     print(f"Files in '{directory_to_process}' finished processing.")
 
