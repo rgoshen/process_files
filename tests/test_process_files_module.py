@@ -67,9 +67,13 @@ class TestProcessFiles(unittest.TestCase):
         renamed_files = os.listdir(self.test_directory)
         for filename in renamed_files:
             if filename != ".hidden_file.txt":
-                self.assertTrue(filename.startswith(f"{current_date}_"))
+                self.assertTrue(
+                    filename.startswith(f"{current_date.replace('-', '')}_")
+                )
             else:
-                self.assertFalse(filename.startswith(f"{current_date}_"))
+                self.assertFalse(
+                    filename.startswith(f"{current_date.replace('-', '')}_")
+                )
 
     def test_prepend_date_to_files_with_custom_date(self):
         # Test the prepend_date_to_files function.
@@ -83,9 +87,11 @@ class TestProcessFiles(unittest.TestCase):
         renamed_files = os.listdir(self.test_directory)
         for filename in renamed_files:
             if filename != ".hidden_file.txt":
-                self.assertTrue(filename.startswith(f"{custom_date}_"))
+                self.assertTrue(filename.startswith(f"{custom_date.replace('-', '')}_"))
             else:
-                self.assertFalse(filename.startswith(f"{custom_date}_"))
+                self.assertFalse(
+                    filename.startswith(f"{custom_date.replace('-', '')}_")
+                )
 
     def test_prepend_time_to_files_with_current_time(self):
         # Test the prepend_time_to_files function.
