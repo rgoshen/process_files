@@ -7,6 +7,7 @@ from unittest.mock import patch
 from process_files_module import (
     get_visible_files,
     prepend_date_to_files,
+    prepend_datetime_to_files,
     print_directory_files,
 )
 
@@ -130,6 +131,66 @@ class TestProcessFiles(unittest.TestCase):
                 self.assertTrue(filename.startswith(f"{custom_time}_"))
             else:
                 self.assertFalse(filename.startswith(f"{custom_time}_"))
+
+    def test_prepend_datetime_to_files_with_current_date_and_time(self):
+        # Test the prepend_datetime_to_files function with using the current date and time.
+
+        # Get the current date
+        current_date = datetime.now().strftime("%Y-%m-%d")
+
+        # Get the current time
+        current_time = datetime.now().strftime("%H:%M:%S")
+
+        # Combines the date and time to one string
+        current_date_time = (
+            f"{current_date.replace('-','')}_{current_time.replace(':','')}"
+        )
+
+        # Stub the get_visible_files function
+        with patch("process_files_module.get_visible_files") as mock_get_visible_files:
+            # Mock the return value of get_visible_files
+            mock_get_visible_files.return_value = ["file1.txt", "file2.txt"]
+
+        # Call the function to prepend the date
+        prepend_datetime_to_files(self.test_directory, current_date, current_time)
+
+        # Check if the file has been renamed with the date prefix
+        renamed_files = os.listdir(self.test_directory)
+        for filename in renamed_files:
+            if filename != ".hidden_file.txt":
+                self.assertTrue(filename.startswith(f"{current_date_time}_"))
+            else:
+                self.assertFalse(filename.startswith(f"{current_date_time}_"))
+
+    def test_prepend_datetime_to_files_with_custom_date_and_time(self):
+        # Test the prepend_datetime_to_files function with a custom date and time.
+
+        # Get the current date
+        custom_date = "2020-04-11"
+
+        # Get the current time
+        custom_time = "09:30:45"
+
+        # Combines the date and time to one string
+        custom_date_time = (
+            f"{custom_date.replace('-','')}_{custom_time.replace(':','')}"
+        )
+
+        # Stub the get_visible_files function
+        with patch("process_files_module.get_visible_files") as mock_get_visible_files:
+            # Mock the return value of get_visible_files
+            mock_get_visible_files.return_value = ["file1.txt", "file2.txt"]
+
+        # Call the function to prepend the date
+        prepend_datetime_to_files(self.test_directory, custom_date, custom_time)
+
+        # Check if the file has been renamed with the date prefix
+        renamed_files = os.listdir(self.test_directory)
+        for filename in renamed_files:
+            if filename != ".hidden_file.txt":
+                self.assertTrue(filename.startswith(f"{custom_date_time}_"))
+            else:
+                self.assertFalse(filename.startswith(f"{custom_date_time}_"))
 
 
 if __name__ == "__main__":
