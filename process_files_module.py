@@ -1,4 +1,5 @@
 import os
+import subprocess
 from datetime import datetime
 
 import colorama
@@ -43,3 +44,25 @@ def prepend_date_time_to_files(directory, date=None, time=None):
 
     print(colorama.Fore.RESET)
     print_directory_files(directory)
+
+
+def change_file_creation_date(directory, new_date=None, new_time=None):
+    if new_date is None and new_time is None:
+        # If both new_date and new_time are not provided, set both to the current date and time
+        new_datetime = datetime.now()
+    else:
+        # If only one of new_date or new_time is provided, set the other to the current date or time
+        new_date = new_date or datetime.now().date()
+        new_time = new_time or datetime.now().time()
+        new_datetime = datetime.combine(new_date, new_time)
+
+        # Format the new datetime as YYYYMMDDHHMM.SS
+    formatted_datetime = new_datetime.strftime("%Y%m%d%H%M.%S")
+
+    # Get the list of visible files in the directory.
+    visible_files = get_visible_files(directory)
+
+    # Iterate through the files in the directory and change their creation date
+    for index, file in enumerate(visible_files):
+        file_path = os.path.join(directory, file)
+        subprocess.run(["touch", "-t", formatted_datetime, file_path])

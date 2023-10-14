@@ -9,7 +9,7 @@ from date_validator import validate_date  # Import the function from date_valida
 #     prepend_datetime_to_files,
 #     prepend_time_to_files,
 #     )
-from process_files_module import prepend_date_time_to_files
+from process_files_module import change_file_creation_date, prepend_date_time_to_files
 from time_validator import validate_time  # Import the function from time_validator.py
 
 
@@ -43,6 +43,11 @@ def main():
         help="Time in 'HH:MM:SS' format",
         )
 
+    # Add the '-c' or '--change-date-time' flag to indicate if you want to change the file's creation date and time
+    parser.add_argument(
+        "-c", "--change-date-time", action="store_true", help="Change the file's creation date and time"
+        )
+
     args = parser.parse_args()
 
     # Determine the directory to process
@@ -62,6 +67,10 @@ def main():
         prepend_date_time_to_files(directory_to_process, args.time)
     else:
         prepend_date_time_to_files(directory_to_process)
+
+    if args.change_date_time:
+        # Change the file's creation date and time
+        change_file_creation_date(directory_to_process, args.date, args.time)
 
     print(f"Files in '{directory_to_process}' finished processing.")
 

@@ -3,7 +3,7 @@ import unittest
 from datetime import datetime
 from unittest.mock import patch
 
-from process_files_module import prepend_date_time_to_files
+from process_files_module import change_file_creation_date, prepend_date_time_to_files
 
 
 # Create a temporary directory for testing.
@@ -146,6 +146,49 @@ class TestProcessFiles(unittest.TestCase):
                 self.assertTrue(filename.startswith(f"{custom_date_time}_"))
             else:
                 self.assertFalse(filename.startswith(f"{custom_date_time}_"))
+
+    def test_change_file_creation_date_with_current_datetime(self):
+        # Test changing the creation date with the current date and time
+        current_datetime = datetime.now()
+        change_file_creation_date(self.test_directory)
+        visible_files = get_visible_files(self.test_directory)
+
+        for filename in visible_files:
+            file_path = os.path.join(self.test_directory, filename)
+            file_stat = os.stat(file_path)
+            file_creation_datetime = datetime.fromtimestamp(file_stat.st_ctime)
+            # Ensure the file's creation date is close to the current date and time
+            self.assertLessEqual(
+                abs(current_datetime - file_creation_datetime), timedelta(seconds=1)
+                )
+
+    def test_change_file_creation_date_with_custom_datetime(self):
+        # Test changing the creation date with a custom date and time
+        custom_date = datetime(2020, 1, 1)
+        custom_time = datetime(2020, 1, 1, 12, 0, 0)
+        change_file_creation_date(self.test_directory, custom_date, custom_time)
+        visible_files = get_visible_files(self.test_directory)
+
+        for filename in visible_files:
+            file_path = os.path.join(self.test_directory, filename)
+            file_stat = os.stat(file_path)
+            file_creation_datetime = datetime.fromtimestamp(file_stat.st_ctime)
+            # Ensure the file's creation date is the custom date and time
+            self.assertEqual(file_creation_datetime, datetime(2020, 1, 1, 12, 0, 0))
+
+    def test_change_file_creation_date_with_hidden_files(self):
+        # Test changing the creation date while ignoring hidden files
+        custom_date = datetime(2020, 1, 1)
+        custom_time = datetime(2020, 1, 1, 12, 0, 0)
+        change_file_creation_date(self.test_directory, custom_date, custom_time)
+        visible_files = get_visible_files(self.test_directory)
+
+        for filename in visible_files:
+            file_path = os.path.join(self.test_directory, filename)
+            file_stat = os.stat(file_path)
+            file_creation_datetime = datetime.fromtimestamp(file_stat.st_ctime)
+            # Ensure the file's creation date is the custom date and time
+            self.assertEqual(file_creation_datetime, datetime(2020, 1, 1, 12, 0, 0))
 
 
 if __name__ == "__main__":
