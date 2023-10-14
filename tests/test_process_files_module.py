@@ -1,9 +1,10 @@
 import os
 import unittest
-from datetime import datetime
+from datetime import datetime, timedelta
 from unittest.mock import patch
 
 from process_files_module import change_file_creation_date, prepend_date_time_to_files
+from utilities import get_visible_files
 
 
 # Create a temporary directory for testing.
